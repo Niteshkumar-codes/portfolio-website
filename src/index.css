@@ -49,6 +49,10 @@ html {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+#about {
+  scroll-margin-top: 110px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -268,4 +272,8 @@ body {
 
 .animate-spin-slow {
   animation: spin-slow 15s linear infinite;
+}
+
+@utility bg-gradient-indigo-purple {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
 }

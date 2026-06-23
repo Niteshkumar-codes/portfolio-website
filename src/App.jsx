@@ -249,7 +249,7 @@ export default function App() {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // height of navbar
+      const offset = 110; // height of navbar + proper clearance
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -307,11 +307,11 @@ export default function App() {
           {/* Brand/Name Logo */}
           <div 
             onClick={() => handleScroll('home')}
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center gap-2 cursor-pointer group select-none font-mono text-base font-extrabold tracking-widest text-[var(--text-title)]"
           >
-            <span className="font-mono text-base font-extrabold tracking-tight text-[var(--text-title)] spring-transition group-hover:text-[var(--color-accent)]">
-              Nitesh Kumar
-            </span>
+            <span className="text-[var(--color-accent)] group-hover:text-[var(--color-accent-secondary)] spring-transition font-bold">&lt;</span>
+            <span className="font-sans font-black text-sm tracking-[0.25em] group-hover:text-[var(--color-accent)] spring-transition uppercase">NITESH KUMAR</span>
+            <span className="text-[var(--color-accent)] group-hover:text-[var(--color-accent-secondary)] spring-transition font-bold">&nbsp;/&gt;</span>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -419,7 +419,7 @@ export default function App() {
       </header>
 
       {/* 2. HERO SECTION (Full Viewport, Grid Mesh, Animated Mesh, Recruiter Stats, Floating Cards) */}
-      <section id="home" className="relative min-h-[calc(100vh-80px)] lg:min-h-0 lg:h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden px-6 py-12 lg:py-0">
+      <section id="home" className="relative min-h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden px-6 pt-24 pb-12 lg:pt-32 lg:pb-20">
         
         {/* Background Mesh Gradients */}
         <div className="absolute inset-0 z-0 bg-gradient-glow opacity-60"></div>
@@ -436,24 +436,28 @@ export default function App() {
         </div>
 
         {/* Content Container */}
-        <div className="max-w-6xl mx-auto w-full relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="max-w-6xl mx-auto w-full relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-4 lg:pt-6">
           
           {/* Left Column: Profile Image & Floating Badges */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center animate-entry delay-100 order-1">
-            <div className="relative group select-none animate-float w-fit">
-              {/* Soft background glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-teal-400 blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none"></div>
+            <div className="relative group select-none animate-float w-fit mx-auto">
               
-              {/* Spinning gradient border overlay behind the image */}
-              <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-teal-400 opacity-75 blur-[2px] animate-spin-slow"></div>
-              
-              {/* Inner glassmorphism circle wrapper */}
-              <div className="relative p-2 rounded-full bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-primary)] shadow-2xl flex items-center justify-center overflow-hidden w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px]">
-                <img 
-                  src="/Nitesh kumar.jpg" 
-                  alt="Nitesh Kumar Profile" 
-                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]" 
-                />
+              {/* Outer circular profile container with overflow-hidden to clip the glow and background */}
+              <div className="relative overflow-hidden rounded-full border border-[var(--border-primary)] bg-[var(--bg-surface)] backdrop-blur-xl shadow-2xl flex items-center justify-center w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px]">
+                {/* Soft background glow */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-teal-400 blur-2xl opacity-35 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none"></div>
+                
+                {/* Spinning gradient border overlay behind the image */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-teal-400 opacity-75 blur-[2px] animate-spin-slow"></div>
+                
+                {/* Inner glassmorphism circle wrapper */}
+                <div className="absolute inset-1.5 p-3.5 sm:p-5 md:p-6 lg:p-8 rounded-full bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-primary)] flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/Nitesh kumar.jpg" 
+                    alt="Nitesh Kumar Profile" 
+                    className="w-full h-full rounded-full object-cover object-[center_15%] scale-[1.02] transition-transform duration-500 group-hover:scale-[1.05]" 
+                  />
+                </div>
               </div>
 
               {/* Floating decorative tech badges */}
@@ -471,6 +475,21 @@ export default function App() {
               <div className="absolute bottom-[40%] -right-8 animate-float w-10 h-10 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-primary)] backdrop-blur-md shadow-lg flex items-center justify-center hover:border-teal-500/40 spring-transition cursor-default">
                 <Icons.MongoIcon />
               </div>
+            </div>
+
+            {/* Professional Identity Block */}
+            <div className="mt-8 flex flex-col items-center text-center select-none animate-entry delay-200">
+              {/* Professional Role Label */}
+              <span className="text-[10px] sm:text-xs font-mono font-black tracking-[0.35em] text-[var(--color-accent-secondary)] uppercase bg-indigo-500/5 border border-indigo-500/10 px-4 py-1.5 rounded-full mb-3.5 shadow-sm">
+                SOFTWARE DEVELOPER
+              </span>
+              
+              {/* Name Display */}
+              <h2 className="text-3xl sm:text-4xl lg:text-4.5xl font-black tracking-tight text-[var(--text-title)]">
+                <span className="bg-gradient-to-r from-[var(--text-title)] via-[var(--text-title)] to-[var(--color-accent)] bg-clip-text text-transparent">
+                  Nitesh Kumar
+                </span>
+              </h2>
             </div>
           </div>
 
@@ -779,7 +798,7 @@ export default function App() {
               <div className="flex-grow flex items-center justify-center">
                 <div className="bg-[var(--bg-surface)] border border-[var(--border-primary)] rounded-lg px-3 py-1 text-[11px] text-[var(--text-muted)] font-mono w-full max-w-md text-center flex items-center justify-center gap-1">
                   <svg className="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                  <span>https://ems.nitesh.dev/admin/dashboard</span>
+                  <span>http://localhost:5173/admin/dashboard</span>
                 </div>
               </div>
               <div className="w-16 hidden sm:block"></div> {/* Spacer to align URL bar center */}
@@ -829,10 +848,10 @@ export default function App() {
                   
                   {/* KPI 1 */}
                   <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-surface)]/40">
-                    <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] block uppercase mb-1">Total Active Staff</span>
+                    <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] block uppercase mb-1">Total Employees</span>
                     <div className="text-xl font-bold text-[var(--text-title)] font-mono flex items-baseline gap-2">
-                      <span>48</span>
-                      <span className="text-[9px] text-emerald-500 font-semibold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">+4 new</span>
+                      <span>15</span>
+                      <span className="text-[9px] text-emerald-500 font-semibold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Test DB</span>
                     </div>
                   </div>
 
@@ -840,16 +859,16 @@ export default function App() {
                   <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-surface)]/40">
                     <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] block uppercase mb-1">Today's Attendance</span>
                     <div className="text-xl font-bold text-[var(--text-title)] font-mono flex items-baseline gap-2">
-                      <span>96.4%</span>
-                      <span className="text-[9px] text-emerald-500 font-semibold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Optimal</span>
+                      <span>93%</span>
+                      <span className="text-[9px] text-emerald-500 font-semibold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Active</span>
                     </div>
                   </div>
 
                   {/* KPI 3 */}
                   <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-surface)]/40">
-                    <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] block uppercase mb-1">Pending Leaves</span>
+                    <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] block uppercase mb-1">Pending Requests</span>
                     <div className="text-xl font-bold text-[var(--text-title)] font-mono flex items-baseline gap-2">
-                      <span>3</span>
+                      <span>2</span>
                       <span className="text-[9px] text-amber-500 font-semibold bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">Requires Review</span>
                     </div>
                   </div>
@@ -942,7 +961,7 @@ export default function App() {
               AI Fitness Tracker
             </h2>
             <p className="text-sm text-[var(--text-body)] max-w-xl leading-relaxed">
-              Detailed breakdown of the fitness database schemas, API routing, and AI models integration.
+              Detailed breakdown of the fitness database schemas, API routing, and calorie tracking implementations.
             </p>
           </div>
 
@@ -954,7 +973,7 @@ export default function App() {
               
               <div>
                 <span className="font-mono text-xs font-semibold text-[var(--color-accent)] tracking-wider block uppercase mb-2">
-                  Interactive AI Application
+                  Interactive MERN Application
                 </span>
                 
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-title)] leading-tight mb-4">
@@ -962,7 +981,7 @@ export default function App() {
                 </h3>
 
                 <p className="text-sm text-[var(--text-body)] leading-relaxed mb-6">
-                  Developed an AI-powered fitness tracking application featuring secure user authentication, profile management, and a responsive UI designed with Tailwind CSS.
+                  Developed a fitness tracking application featuring secure user authentication, personal calorie tracking, and a responsive dashboard UI designed with Tailwind CSS.
                 </p>
 
                 {/* Tech Stack Badge List */}
@@ -1037,7 +1056,7 @@ export default function App() {
                   </div>
                   <div className="flex items-center gap-2 text-xs text-[var(--text-body)]">
                     <span className="text-[var(--color-accent)]">✓</span>
-                    <span>AI Food Image Analysis</span>
+                    <span>Calorie & Macro Calculations</span>
                   </div>
                 </div>
               </div>
@@ -1045,12 +1064,12 @@ export default function App() {
               {/* Technical Implementation */}
               <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40">
                 <span className="text-[11px] font-mono font-bold text-[var(--color-accent-secondary)] tracking-wider block uppercase mb-2">
-                  AI Integration & API Design
+                  Metrics & API Design
                 </span>
                 <ul className="text-xs text-[var(--text-body)] space-y-2 list-none pl-0">
                   <li className="flex items-start gap-2">
                     <span className="text-[var(--color-accent)] mt-0.5">▹</span>
-                    <span><strong>AI-Based Analysis:</strong> Integrates food image analysis pipelines for automated calorie estimation.</span>
+                    <span><strong>Calorie Tracking:</strong> Integrates food calorie estimation and user physical metrics calculators.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[var(--color-accent)] mt-0.5">▹</span>
@@ -1069,7 +1088,7 @@ export default function App() {
       {/* ====================================
           CREATOR ABOUT SECTION (NEW)
           ==================================== */}
-      <section id="about" className="py-24 px-6 border-t border-[var(--border-primary)] bg-[var(--bg-base)] relative">
+      <section id="about" className="pt-32 pb-24 px-6 border-t border-[var(--border-primary)] bg-[var(--bg-base)] relative">
         <div className="max-w-6xl mx-auto text-left relative z-10">
           
           <div className="mb-16 scroll-animate">
@@ -1089,13 +1108,19 @@ export default function App() {
             {/* Left Column: Profile Card */}
             <div className="lg:col-span-5 flex flex-col gap-6 text-left">
               <div className="relative group select-none w-fit mb-2">
-                <div className="absolute inset-0 rounded-full bg-gradient-indigo-purple blur-xl opacity-35 group-hover:opacity-50 spring-transition pointer-events-none"></div>
-                <div className="relative p-2 rounded-full border border-[var(--border-primary)] bg-[var(--bg-surface)] backdrop-blur-xl hover:border-[var(--color-accent)]/50 spring-transition shadow-xl">
-                  <img 
-                    src="/Nitesh kumar.jpg" 
-                    alt="Nitesh Kumar profile avatar portrait" 
-                    className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover shadow-2xl spring-transition group-hover:scale-[1.02]" 
-                  />
+                {/* Profile Image Container / Parent Wrapper */}
+                <div className="relative overflow-hidden rounded-full border border-[var(--border-primary)] bg-[var(--bg-surface)] backdrop-blur-xl shadow-xl flex items-center justify-center w-32 h-32 sm:w-36 sm:h-36 hover:border-[var(--color-accent)]/50 spring-transition">
+                  {/* Glow layer - contained within overflow-hidden */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-indigo-purple blur-xl opacity-35 group-hover:opacity-50 spring-transition pointer-events-none"></div>
+                  
+                  {/* Inner wrapper */}
+                  <div className="absolute inset-1.5 p-2 rounded-full bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-primary)] flex items-center justify-center overflow-hidden">
+                    <img 
+                      src="/Nitesh kumar.jpg" 
+                      alt="Nitesh Kumar profile avatar portrait" 
+                      className="w-full h-full rounded-full object-cover spring-transition group-hover:scale-[1.02]" 
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -1123,71 +1148,92 @@ export default function App() {
               </div>
             </div>
 
-            {/* Right Column: Timeline Layout (Current Focus) */}
+            {/* Right Column: Education & Technical Skills Grid */}
             <div className="lg:col-span-7 space-y-6 text-left border-t lg:border-t-0 lg:border-l border-[var(--border-primary)] pt-8 lg:pt-0 lg:pl-10 relative">
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--color-accent)] mb-6">
-                Current Focus & Timeline
+                Education & Technical Skills
               </h4>
 
-              {/* Vertical line indicator */}
-              <div className="absolute left-[31px] lg:left-[71px] top-[74px] bottom-[20px] w-[2px] bg-gradient-to-b from-[var(--color-accent)] to-[var(--color-accent-secondary)]/30 hidden sm:block"></div>
-
-              <div className="space-y-8 relative z-10">
+              <div className="space-y-6 relative z-10">
                 
-                {/* Timeline Item 1: B.Tech CSE */}
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
-                  <div className="w-16 h-16 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-surface)] flex items-center justify-center flex-shrink-0 relative z-20 shadow-md">
+                {/* Education Block */}
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                  <div className="w-12 h-12 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-surface)] flex items-center justify-center flex-shrink-0 relative z-20 shadow-md text-[var(--color-accent)]">
                     <Icons.Academic />
                   </div>
                   <div>
                     <span className="text-[10px] font-mono text-[var(--text-muted)] font-semibold uppercase block mb-1">Education</span>
                     <h5 className="text-base font-bold text-[var(--text-title)] mb-1">Bachelor of Technology in Computer Science Engineering</h5>
-                    <span className="font-mono text-xs font-semibold text-[var(--color-accent)] block mb-1.5">Dronacharya Group of Institutions, Greater Noida • August 2023 – July 2027</span>
+                    <span className="font-mono text-xs font-semibold text-[var(--color-accent-secondary)] block mb-1.5">Dronacharya Group of Institutions, Greater Noida</span>
+                    <span className="inline-block text-[11px] font-mono font-medium px-2.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/15 mb-3">
+                      Aug 2023 – Jul 2027
+                    </span>
                     <p className="text-xs text-[var(--text-body)] leading-relaxed">
-                      Studying core computer science curriculum, software engineering methodologies, data structures & algorithms, databases, and operating systems.
+                      Core Computer Science curriculum focusing on software engineering principles, data structures & algorithms, database management, and operating systems.
                     </p>
                   </div>
                 </div>
 
-                {/* Timeline Item 2: EMS */}
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
-                  <div className="w-16 h-16 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-surface)] flex items-center justify-center flex-shrink-0 relative z-20 shadow-md">
-                    <Icons.CheckCircle />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-[var(--text-muted)] font-semibold uppercase block mb-1">Current Focus</span>
-                    <h5 className="text-base font-bold text-[var(--text-title)] mb-1.5">Employee Management System</h5>
-                    <p className="text-xs text-[var(--text-body)] leading-relaxed">
-                      Architecting secure full-stack solutions, custom authentication logic, and role-based client routing workflows.
-                    </p>
-                  </div>
-                </div>
+                {/* Divider Line */}
+                <div className="h-px bg-[var(--border-primary)] my-6"></div>
 
-                {/* Timeline Item 3: AI Fitness Tracker */}
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
-                  <div className="w-16 h-16 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-surface)] flex items-center justify-center flex-shrink-0 relative z-20 shadow-md">
-                    <Icons.Sparkles />
+                {/* Technical Skills Overview */}
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                  <div className="w-12 h-12 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-surface)] flex items-center justify-center flex-shrink-0 relative z-20 shadow-md text-[var(--color-accent-secondary)]">
+                    <Icons.MernStack />
                   </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-[var(--text-muted)] font-semibold uppercase block mb-1">Current Focus</span>
-                    <h5 className="text-base font-bold text-[var(--text-title)] mb-1.5">AI Fitness Tracker</h5>
-                    <p className="text-xs text-[var(--text-body)] leading-relaxed">
-                      Integrating diet/calorie logs, backend REST APIs, and automated food image analysis modules.
-                    </p>
-                  </div>
-                </div>
+                  <div className="w-full">
+                    <span className="text-[10px] font-mono text-[var(--text-muted)] font-semibold uppercase block mb-3">Technical Skills</span>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Programming Languages */}
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Programming Languages</span>
+                        <p className="text-xs text-[var(--text-body)] leading-relaxed">
+                          Java, JavaScript, C
+                        </p>
+                      </div>
 
-                {/* Timeline Item 4: Placement Preparation */}
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
-                  <div className="w-16 h-16 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-surface)] flex items-center justify-center flex-shrink-0 relative z-20 shadow-md">
-                    <Icons.Briefcase />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-[var(--text-muted)] font-semibold uppercase block mb-1">Current Focus</span>
-                    <h5 className="text-base font-bold text-[var(--text-title)] mb-1.5">MERN Stack Development & Placement Preparation</h5>
-                    <p className="text-xs text-[var(--text-body)] leading-relaxed font-semibold text-[var(--color-accent-secondary)]">
-                      Refining API security checks, practicing problem-solving, and preparing for engineering recruitment drives.
-                    </p>
+                      {/* Frontend */}
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Frontend</span>
+                        <p className="text-xs text-[var(--text-body)] leading-relaxed">
+                          HTML5, CSS3, React.js, Tailwind CSS
+                        </p>
+                      </div>
+
+                      {/* Backend */}
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Backend</span>
+                        <p className="text-xs text-[var(--text-body)] leading-relaxed">
+                          Node.js, Express.js
+                        </p>
+                      </div>
+
+                      {/* Databases */}
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Databases</span>
+                        <p className="text-xs text-[var(--text-body)] leading-relaxed">
+                          MongoDB, MySQL
+                        </p>
+                      </div>
+
+                      {/* Tools */}
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Tools</span>
+                        <p className="text-xs text-[var(--text-body)] leading-relaxed">
+                          Git, GitHub, VS Code, Postman
+                        </p>
+                      </div>
+
+                      {/* Core CS Subjects */}
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Core CS Subjects</span>
+                        <p className="text-xs text-[var(--text-body)] leading-relaxed">
+                          DSA, OOP, DBMS, Operating Systems
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
