@@ -162,7 +162,6 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   // Sync theme changes with DOM element
   useEffect(() => {
@@ -227,22 +226,7 @@ export default function App() {
     };
   }, []);
 
-  // Escape key and body scroll lock side effects for Resume Modal
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setIsResumeOpen(false);
-      }
-    };
-    if (isResumeOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-    }
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isResumeOpen]);
+
 
   // Handle mobile menu smooth scroll anchor clicks
   const handleScroll = (id) => {
@@ -331,9 +315,14 @@ export default function App() {
             <button onClick={() => handleScroll('achievements')} className="text-sm font-medium text-[var(--text-body)] hover:text-[var(--text-title)] section-anchor pb-1 spring-transition cursor-pointer">
               Achievements
             </button>
-            <button onClick={() => setIsResumeOpen(true)} className="text-sm font-medium text-[var(--text-body)] hover:text-[var(--text-title)] section-anchor pb-1 spring-transition cursor-pointer">
+            <a 
+              href="/resume/Nitesh%20Kumar_Resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-sm font-medium text-[var(--text-body)] hover:text-[var(--text-title)] section-anchor pb-1 spring-transition cursor-pointer"
+            >
               Resume
-            </button>
+            </a>
             <button onClick={() => handleScroll('contact')} className="text-sm font-medium text-[var(--text-body)] hover:text-[var(--text-title)] section-anchor pb-1 spring-transition cursor-pointer">
               Contact
             </button>
@@ -352,12 +341,14 @@ export default function App() {
             </button>
 
             {/* Resume Button */}
-            <button
-              onClick={() => setIsResumeOpen(true)}
-              className="px-6 py-3 rounded-xl text-xs font-extrabold bg-[var(--text-title)] text-[var(--bg-base)] hover:scale-[1.03] active:scale-[0.98] spring-transition shadow-lg hover:shadow-indigo-500/10 select-none cursor-pointer"
+            <a
+              href="/resume/Nitesh%20Kumar_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl text-xs font-extrabold bg-[var(--text-title)] text-[var(--bg-base)] hover:scale-[1.03] active:scale-[0.98] spring-transition shadow-lg hover:shadow-indigo-500/10 select-none cursor-pointer flex items-center justify-center"
             >
-              View Resume
-            </button>
+              Resume
+            </a>
           </div>
 
           {/* Mobile Actions and Hamburger Toggle */}
@@ -400,26 +391,35 @@ export default function App() {
               <button onClick={() => handleScroll('achievements')} className="text-base font-semibold text-[var(--text-title)] py-2 border-b border-[var(--border-primary)]/40 w-full text-left">
                 Achievements
               </button>
-              <button onClick={() => { setMobileMenuOpen(false); setIsResumeOpen(true); }} className="text-base font-semibold text-[var(--text-title)] py-2 border-b border-[var(--border-primary)]/40 w-full text-left">
+              <a 
+                href="/resume/Nitesh%20Kumar_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)} 
+                className="text-base font-semibold text-[var(--text-title)] py-2 border-b border-[var(--border-primary)]/40 w-full text-left block"
+              >
                 Resume
-              </button>
+              </a>
               <button onClick={() => handleScroll('contact')} className="text-base font-semibold text-[var(--text-title)] py-2 border-b border-[var(--border-primary)]/40 w-full text-left">
                 Contact
               </button>
             </div>
             
-            <button
-              onClick={() => { setMobileMenuOpen(false); setIsResumeOpen(true); }}
+            <a
+              href="/resume/Nitesh%20Kumar_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center py-3.5 rounded-xl font-extrabold bg-[var(--text-title)] text-[var(--bg-base)] hover:scale-[1.02] active:scale-[0.98] spring-transition block cursor-pointer"
             >
-              View Resume
-            </button>
+              Resume
+            </a>
           </div>
         )}
       </header>
 
       {/* 2. HERO SECTION (Full Viewport, Grid Mesh, Animated Mesh, Recruiter Stats, Floating Cards) */}
-      <section id="home" className="relative min-h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden px-6 pt-24 pb-12 lg:pt-32 lg:pb-20">
+      <section id="home" className="relative min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-100px)] py-16 lg:py-24 flex items-center justify-center overflow-hidden px-6">
         
         {/* Background Mesh Gradients */}
         <div className="absolute inset-0 z-0 bg-gradient-glow opacity-60"></div>
@@ -436,84 +436,43 @@ export default function App() {
         </div>
 
         {/* Content Container */}
-        <div className="max-w-6xl mx-auto w-full relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-4 lg:pt-6">
+        <div className="max-w-7xl mx-auto w-full relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Profile Image & Floating Badges */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center animate-entry delay-100 order-1">
-            <div className="relative group select-none animate-float w-fit mx-auto">
-              
-              {/* Outer circular profile container with overflow-hidden to clip the glow and background */}
-              <div className="relative overflow-hidden rounded-full border border-[var(--border-primary)] bg-[var(--bg-surface)] backdrop-blur-xl shadow-2xl flex items-center justify-center w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px]">
-                {/* Soft background glow */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-teal-400 blur-2xl opacity-35 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none"></div>
-                
-                {/* Spinning gradient border overlay behind the image */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-teal-400 opacity-75 blur-[2px] animate-spin-slow"></div>
-                
-                {/* Inner glassmorphism circle wrapper */}
-                <div className="absolute inset-1.5 p-3.5 sm:p-5 md:p-6 lg:p-8 rounded-full bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-primary)] flex items-center justify-center overflow-hidden">
-                  <img 
-                    src="/Nitesh kumar.jpg" 
-                    alt="Nitesh Kumar Profile" 
-                    className="w-full h-full rounded-full object-cover object-[center_15%] scale-[1.02] transition-transform duration-500 group-hover:scale-[1.05]" 
-                  />
-                </div>
-              </div>
-
-              {/* Floating decorative tech badges */}
-              {/* React icon badge */}
-              <div className="absolute -top-3 -right-3 animate-float w-10 h-10 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-primary)] backdrop-blur-md shadow-lg flex items-center justify-center hover:border-indigo-500/40 spring-transition cursor-default">
-                <Icons.ReactIcon />
-              </div>
-              
-              {/* Node icon badge */}
-              <div className="absolute -bottom-2 -left-3 animate-float-slow w-10 h-10 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-primary)] backdrop-blur-md shadow-lg flex items-center justify-center hover:border-emerald-500/40 spring-transition cursor-default">
-                <Icons.NodeIcon />
-              </div>
-
-              {/* MongoDB icon badge */}
-              <div className="absolute bottom-[40%] -right-8 animate-float w-10 h-10 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-primary)] backdrop-blur-md shadow-lg flex items-center justify-center hover:border-teal-500/40 spring-transition cursor-default">
-                <Icons.MongoIcon />
-              </div>
-            </div>
-
-            {/* Professional Identity Block */}
-            <div className="mt-8 flex flex-col items-center text-center select-none animate-entry delay-200">
-              {/* Professional Role Label */}
-              <span className="text-[10px] sm:text-xs font-mono font-black tracking-[0.35em] text-[var(--color-accent-secondary)] uppercase bg-indigo-500/5 border border-indigo-500/10 px-4 py-1.5 rounded-full mb-3.5 shadow-sm">
-                SOFTWARE DEVELOPER
-              </span>
-              
-              {/* Name Display */}
-              <h2 className="text-3xl sm:text-4xl lg:text-4.5xl font-black tracking-tight text-[var(--text-title)]">
-                <span className="bg-gradient-to-r from-[var(--text-title)] via-[var(--text-title)] to-[var(--color-accent)] bg-clip-text text-transparent">
-                  Nitesh Kumar
-                </span>
-              </h2>
-            </div>
-          </div>
-
-          {/* Right Column: Big Headline & Action Targets */}
-          <div className="lg:col-span-7 text-left flex flex-col justify-center animate-entry order-2">
+          {/* Left Column: Big Headline & Action Targets */}
+          <div className="lg:col-span-7 text-left flex flex-col justify-center animate-entry relative">
+            
+            {/* Subtle glass container background element behind text to fill space */}
+            <div className="absolute -inset-6 -z-10 rounded-3xl bg-[var(--bg-surface)]/10 backdrop-blur-[2px] border border-[var(--border-primary)]/10 pointer-events-none hidden md:block"></div>
+            
+            {/* Soft background glow directly behind content */}
+            <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-indigo-500/5 blur-[80px] -z-20 animate-pulse-glow"></div>
             
             {/* Status indicator */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-500/15 bg-indigo-500/5 text-indigo-400 text-xs font-mono w-fit mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-500/15 bg-indigo-500/5 text-indigo-400 text-xs font-mono w-fit mb-6">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              B.Tech CSE Student • Placement Ready
+              B.Tech Computer Science Engineering Student • Placement Ready
             </div>
 
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-[var(--text-title)] mb-5 text-balance">
-              Full Stack Developer
+            {/* Main Heading */}
+            <h1 className="flex flex-col gap-2 mb-8 select-none text-left">
+              <span className="text-xl sm:text-2xl font-bold text-[var(--text-body)]">
+                Hi, I'm
+              </span>
+              <span className="text-5xl sm:text-6xl md:text-7xl xl:text-[5.5rem] font-black tracking-tight leading-[0.95] bg-gradient-to-r from-[var(--text-title)] via-[var(--text-title)] to-[var(--color-accent)] bg-clip-text text-transparent">
+                Nitesh Kumar
+              </span>
+              <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-title)] mt-2">
+                Software Developer
+              </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-sm sm:text-base lg:text-lg text-[var(--text-body)] leading-relaxed max-w-xl mb-6 text-pretty">
-              B.Tech Computer Science Engineering Student specializing in React.js, Node.js, Express.js, MongoDB, and modern web application development.
+            <p className="text-sm sm:text-base lg:text-lg text-[var(--text-body)] leading-relaxed max-w-2xl mb-10 text-pretty">
+              I build modern, scalable, and responsive full-stack web applications using React.js, Node.js, Express.js, and MongoDB. Passionate about creating clean user experiences and solving real-world problems through technology.
             </p>
 
             {/* Social Accounts Row */}
-            <div className="flex items-center gap-3.5 mb-6">
+            <div className="flex items-center gap-3.5 mb-10">
               <a 
                 href="https://github.com/Niteshkumar-codes" 
                 target="_blank" 
@@ -542,7 +501,7 @@ export default function App() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 mb-10">
+            <div className="flex flex-wrap gap-4">
               <button 
                 onClick={() => handleScroll('projects')}
                 className="px-7 py-3.5 rounded-xl bg-gradient-indigo-purple text-white hover:opacity-90 font-semibold text-sm spring-transition flex items-center gap-2 select-none shadow-lg cursor-pointer"
@@ -550,95 +509,96 @@ export default function App() {
                 <span>View Projects</span>
                 <Icons.ArrowDown />
               </button>
-              <button 
-                onClick={() => setIsResumeOpen(true)}
+              <a 
+                href="/resume/Nitesh%20Kumar_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-7 py-3.5 rounded-xl border-2 border-indigo-500/30 hover:border-indigo-500 bg-[var(--bg-surface)] text-[var(--text-title)] hover:text-white font-extrabold text-sm hover:scale-[1.03] active:scale-[0.98] spring-transition select-none shadow-lg hover:shadow-indigo-500/20 cursor-pointer flex items-center gap-2"
               >
                 <span>View Resume</span>
                 <svg className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 spring-transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-              </button>
+              </a>
             </div>
 
-            {/* Professional Identity Cards */}
-            <div className="premium-glass-card p-5 sm:p-6 flex flex-col gap-5 relative overflow-hidden">
-              <div className="absolute inset-0 bg-radial-gradient(circle at top right, rgba(99, 102, 241, 0.05) 0%, transparent 60%) z-0 pointer-events-none"></div>
+          </div>
+
+          {/* Right Column: Premium Floating Glass Card */}
+          <div className="lg:col-span-5 flex items-center justify-center animate-entry delay-100">
+            <div className="relative group select-none animate-float w-full max-w-sm">
+              {/* Soft background glow */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-teal-400/10 blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
               
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--color-accent)] mb-2 relative z-10">
-                Technical Profile Highlights
-              </h3>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 relative z-10">
+              {/* Spinning gradient border overlay behind the card */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-teal-400/20 opacity-75 blur-[2px]"></div>
+              
+              {/* Card Container */}
+              <div className="relative premium-glass-card p-6 sm:p-8 flex flex-col gap-6 overflow-hidden rounded-3xl border border-[var(--border-primary)] bg-[var(--bg-surface)]/60 backdrop-blur-xl">
                 
-                {/* Block 1 */}
-                <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40 hover:border-[var(--color-accent)]/30 spring-transition">
-                  <div className="text-base font-bold text-[var(--text-title)] font-mono mb-1 text-[var(--color-accent)]">
-                    Full Stack Developer
+                {/* Header / Top Control Bar (Mac Terminal style) */}
+                <div className="flex items-center justify-between border-b border-[var(--border-primary)] pb-4">
+                  <div className="flex items-center gap-1.5 select-none">
+                    <span className="w-3 h-3 rounded-full bg-rose-500/80 block"></span>
+                    <span className="w-3 h-3 rounded-full bg-amber-500/80 block"></span>
+                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 block"></span>
                   </div>
-                  <div className="text-[10px] font-medium text-[var(--text-body)]">
-                    Core Competency
+                  <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] tracking-wider uppercase">EXPERT CONSOLE</span>
+                </div>
+
+                {/* Core Tech Stack Section */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-indigo-400">STACK_PROFILE</span>
+                    <span className="flex items-center gap-1.5 text-[9px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-2 py-0.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      ACTIVE
+                    </span>
+                  </div>
+
+                  <div className="space-y-3 pt-1">
+                    {/* MERN Stack Row */}
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--border-primary)]/80 bg-[var(--bg-base)]/40 hover:border-indigo-500/35 spring-transition">
+                      <span className="text-xs font-mono text-[var(--text-body)]">MERN Stack</span>
+                      <span className="text-xs font-mono font-bold text-indigo-400">CORE</span>
+                    </div>
+
+                    {/* React.js Row */}
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--border-primary)]/80 bg-[var(--bg-base)]/40 hover:border-indigo-500/35 spring-transition">
+                      <span className="text-xs font-mono text-[var(--text-body)]">React.js</span>
+                      <span className="text-[10px] font-mono font-bold text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">FRONTEND</span>
+                    </div>
+
+                    {/* Node.js Row */}
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--border-primary)]/80 bg-[var(--bg-base)]/40 hover:border-indigo-500/35 spring-transition">
+                      <span className="text-xs font-mono text-[var(--text-body)]">Node.js</span>
+                      <span className="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">BACKEND</span>
+                    </div>
+
+                    {/* MongoDB Row */}
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--border-primary)]/80 bg-[var(--bg-base)]/40 hover:border-indigo-500/35 spring-transition">
+                      <span className="text-xs font-mono text-[var(--text-body)]">MongoDB</span>
+                      <span className="text-[10px] font-mono font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">DATABASE</span>
+                    </div>
+
+                    {/* REST APIs Row */}
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--border-primary)]/80 bg-[var(--bg-base)]/40 hover:border-indigo-500/35 spring-transition">
+                      <span className="text-xs font-mono text-[var(--text-body)]">REST APIs</span>
+                      <span className="text-[10px] font-mono font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">ARCHITECTURE</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Block 2 */}
-                <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40 hover:border-[var(--color-accent)]/30 spring-transition">
-                  <div className="text-base font-bold text-[var(--text-title)] font-mono mb-1 text-[var(--color-accent-secondary)]">
-                    B.Tech CSE Student
-                  </div>
-                  <div className="text-[10px] font-medium text-[var(--text-body)]">
-                    Academic Path
-                  </div>
+                {/* Status Section */}
+                <div className="mt-2 pt-4 border-t border-[var(--border-primary)] flex items-center justify-between text-xs font-mono">
+                  <span className="text-[var(--text-muted)]">Career Status:</span>
+                  <span className="font-bold text-emerald-400 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Open to Opportunities
+                  </span>
                 </div>
 
-                {/* Block 3 */}
-                <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40 hover:border-[var(--color-accent)]/30 spring-transition">
-                  <div className="text-base font-bold text-[var(--text-title)] font-mono mb-1 text-indigo-400">
-                    React.js Developer
-                  </div>
-                  <div className="text-[10px] font-medium text-[var(--text-body)]">
-                    Frontend Strengths
-                  </div>
-                </div>
-
-                {/* Block 4 */}
-                <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40 hover:border-[var(--color-accent)]/30 spring-transition">
-                  <div className="text-base font-bold text-[var(--text-title)] font-mono mb-1 text-teal-400">
-                    Backend Development
-                  </div>
-                  <div className="text-[10px] font-medium text-[var(--text-body)]">
-                    APIs & Databases
-                  </div>
-                </div>
-
-                {/* Block 5 */}
-                <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40 hover:border-[var(--color-accent)]/30 spring-transition">
-                  <div className="text-base font-bold text-[var(--text-title)] font-mono mb-1 text-amber-400">
-                    Problem Solving
-                  </div>
-                  <div className="text-[10px] font-medium text-[var(--text-body)]">
-                    Core CS Competency
-                  </div>
-                </div>
-
-                {/* Block 6 */}
-                <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)]/40 hover:border-[var(--color-accent)]/30 spring-transition">
-                  <div className="text-sm font-bold text-[var(--text-title)] font-mono mb-1 text-rose-400">
-                    Open to Placements & Internships
-                  </div>
-                  <div className="text-[10px] font-medium text-[var(--text-body)]">
-                    Career Readiness
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Verified Badge */}
-              <div className="mt-2 py-2 px-4 rounded-xl bg-[var(--border-primary)]/40 border border-[var(--border-primary)] text-center text-xs font-mono text-[var(--text-body)] relative z-10 flex items-center justify-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Verified Source Repository Available</span>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -1127,7 +1087,7 @@ export default function App() {
                     <img 
                       src="/Nitesh kumar.jpg" 
                       alt="Nitesh Kumar profile avatar portrait" 
-                      className="w-full h-full rounded-full object-cover spring-transition group-hover:scale-[1.02]" 
+                      className="w-full h-full rounded-full object-cover object-top spring-transition group-hover:scale-[1.02]" 
                     />
                   </div>
                 </div>
@@ -1673,12 +1633,14 @@ export default function App() {
                     Relocation Open • India
                   </span>
                 </div>
-                <button 
-                  onClick={() => setIsResumeOpen(true)}
-                  className="px-7 py-3.5 rounded-xl text-sm font-extrabold bg-[var(--text-title)] text-[var(--bg-base)] hover:scale-[1.03] active:scale-[0.98] spring-transition shadow-lg hover:shadow-indigo-500/10 select-none cursor-pointer"
+                <a 
+                  href="/resume/Nitesh%20Kumar_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-7 py-3.5 rounded-xl text-sm font-extrabold bg-[var(--text-title)] text-[var(--bg-base)] hover:scale-[1.03] active:scale-[0.98] spring-transition shadow-lg hover:shadow-indigo-500/10 select-none cursor-pointer flex items-center justify-center"
                 >
-                  View Resume
-                </button>
+                  Resume
+                </a>
               </div>
             </div>
 
@@ -1702,45 +1664,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Premium Full-Screen Resume Modal Overlay */}
-      {isResumeOpen && (
-        <div 
-          className="fixed inset-0 z-[20000] bg-black/75 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-8 animate-entry"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsResumeOpen(false);
-          }}
-        >
-          {/* Modal Container (90-95% width, readable height) */}
-          <div className="relative w-full max-w-5xl h-[88vh] bg-[var(--bg-base)] border border-[var(--border-primary)] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-entry duration-300">
-            
-            {/* Header / Top Bar */}
-            <div className="bg-[var(--bg-surface)] px-6 py-4 border-b border-[var(--border-primary)] flex items-center justify-between select-none">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-xs font-mono text-[var(--text-title)] font-bold uppercase tracking-wider">Nitesh_Kumar_Resume.pdf</span>
-              </div>
-              <button 
-                onClick={() => setIsResumeOpen(false)}
-                className="p-2 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-base)] hover:bg-[var(--bg-surface-hover)] text-[var(--text-title)] hover:text-rose-500 spring-transition cursor-pointer"
-                aria-label="Close modal"
-              >
-                <Icons.Close />
-              </button>
-            </div>
 
-            {/* Document Viewer Frame */}
-            <div className="flex-grow w-full h-full bg-[var(--bg-base)]">
-              <iframe 
-                src="/resume/Nitesh%20Kumar_Resume.pdf#toolbar=0" 
-                title="Nitesh Kumar Resume Document"
-                className="w-full h-full border-0"
-                loading="lazy"
-              ></iframe>
-            </div>
-
-          </div>
-        </div>
-      )}
 
     </div>
   );
