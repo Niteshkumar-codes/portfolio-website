@@ -693,7 +693,7 @@ export default function App() {
                 <a 
                   href="https://employee-management-system-1-1tc4.onrender.com/" 
                   target="_blank" 
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-xs font-bold px-5 py-3 rounded-xl bg-[var(--color-accent)] text-white hover:opacity-90 spring-transition cursor-pointer"
                 >
                   <Icons.ExternalLink />
@@ -996,6 +996,15 @@ export default function App() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-3">
+                <a 
+                  href="https://ai-fitness-tracker-henna.vercel.app" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-3 rounded-xl bg-[var(--color-accent)] text-white hover:opacity-90 spring-transition cursor-pointer"
+                >
+                  <Icons.ExternalLink />
+                  <span>Live Demo</span>
+                </a>
                 <a 
                   href="https://github.com/Niteshkumar-codes/AI-Fitness-Tracker" 
                   target="_blank" 
