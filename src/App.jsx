@@ -515,7 +515,7 @@ export default function App() {
                 rel="noopener noreferrer"
                 className="px-7 py-3.5 rounded-xl border-2 border-indigo-500/30 hover:border-indigo-500 bg-[var(--bg-surface)] text-[var(--text-title)] hover:text-white font-extrabold text-sm hover:scale-[1.03] active:scale-[0.98] spring-transition select-none shadow-lg hover:shadow-indigo-500/20 cursor-pointer flex items-center gap-2"
               >
-                <span>View Resume</span>
+                <span>Resume</span>
                 <svg className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 spring-transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
               </a>
             </div>
@@ -1159,7 +1159,7 @@ export default function App() {
                       <div className="space-y-1">
                         <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Programming Languages</span>
                         <p className="text-xs text-[var(--text-body)] leading-relaxed">
-                          Java, JavaScript, C
+                          Java, JavaScript, Python
                         </p>
                       </div>
 
@@ -1199,7 +1199,7 @@ export default function App() {
                       <div className="space-y-1">
                         <span className="text-[11px] font-bold text-[var(--text-title)] font-mono block">Core CS Subjects</span>
                         <p className="text-xs text-[var(--text-body)] leading-relaxed">
-                          DSA, OOP, DBMS, Operating Systems
+                          Computer Networks, OOP, DBMS, Operating System
                         </p>
                       </div>
                     </div>
@@ -1252,9 +1252,9 @@ export default function App() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 rounded bg-indigo-500/10 flex items-center justify-center font-mono text-[var(--color-accent)] font-bold text-xs">C</span>
+                    <span className="w-6 h-6 rounded bg-sky-500/10 flex items-center justify-center font-mono text-sky-400 font-bold text-xs">Py</span>
                     <div>
-                      <h4 className="text-sm font-bold text-[var(--text-title)] font-mono">C</h4>
+                      <h4 className="text-sm font-bold text-[var(--text-title)] font-mono">Python</h4>
                     </div>
                   </div>
                 </div>
@@ -1392,7 +1392,7 @@ export default function App() {
                   <div className="flex items-center gap-3">
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 block"></span>
                     <div>
-                      <h4 className="text-sm font-bold text-[var(--text-title)] font-mono">Data Structures & Algorithms</h4>
+                      <h4 className="text-sm font-bold text-[var(--text-title)] font-mono">Computer Networks</h4>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
