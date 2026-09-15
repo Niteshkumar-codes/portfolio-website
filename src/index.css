@@ -49,7 +49,12 @@ html {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-#about {
+#about,
+#internship,
+#projects,
+#skills,
+#achievements,
+#contact {
   scroll-margin-top: 110px;
 }
 
